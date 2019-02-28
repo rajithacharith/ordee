@@ -11,9 +11,14 @@ public class Customer {
     private String address;
     private String telephoneNo;
 
-    public Customer(String customerName, String customerId) {
-        this.customerName = customerName;
+    public Customer(){
+
+    }
+    public Customer(String customerId, String customerName, String address, String telephoneNo) {
         this.customerId = customerId;
+        this.customerName = customerName;
+        this.address = address;
+        this.telephoneNo = telephoneNo;
     }
 
     public String getCustomerId() {

@@ -1,4 +1,4 @@
-package com.charith.ordee.beans.repository;
+package com.charith.ordee.repository;
 
 import com.charith.ordee.beans.User.Customer;
 import org.springframework.data.repository.CrudRepository;

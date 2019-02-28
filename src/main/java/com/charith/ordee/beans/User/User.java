@@ -10,6 +10,16 @@ public class User {
     private String accountType;
     private String accountId;
 
+    public User(){
+
+    }
+
+    public User(String username, String password, String accountType, String accountId) {
+        this.username = username;
+        this.password = password;
+        this.accountType = accountType;
+        this.accountId = accountId;
+    }
 
     public String getUsername() {
         return username;
