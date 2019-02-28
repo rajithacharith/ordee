@@ -1,5 +1,6 @@
 package com.charith.ordee.rest;
 
+import com.charith.ordee.beans.dto.LoginDTO;
 import com.charith.ordee.beans.dto.UserDTO;
 import com.charith.ordee.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,9 @@ public class HomeController {
     private AuthService authService;
 
     @PostMapping("login")
-    public ResponseEntity login(){
-
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity login(@RequestBody LoginDTO loginDTO){
+        ResponseEntity res = authService.login(loginDTO);
+        return res;
     }
     @PostMapping("register")
     public ResponseEntity register(@RequestBody UserDTO userDTO){
