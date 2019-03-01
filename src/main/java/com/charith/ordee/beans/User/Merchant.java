@@ -12,6 +12,7 @@ public class Merchant {
     private String merchantAdderss;
     private String merchantTelephoneNo;
 
+
     public String getMerchantID() {
         return merchantID;
     }
@@ -50,4 +51,6 @@ public class Merchant {
         this.merchantAdderss = merchantAdderss;
         this.merchantTelephoneNo = merchantTelephoneNo;
     }
+
+
 }

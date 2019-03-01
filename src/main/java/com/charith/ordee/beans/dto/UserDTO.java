@@ -6,6 +6,7 @@ public class UserDTO {
     private String name;
     private String userType;
     private String userAddress;
+    private String email;
     private String userTel;
 
     public String getUsername() {
@@ -54,5 +55,13 @@ public class UserDTO {
 
     public void setUserTel(String userTel) {
         this.userTel = userTel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

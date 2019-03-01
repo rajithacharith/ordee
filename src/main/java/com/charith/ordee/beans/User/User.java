@@ -9,16 +9,21 @@ public class User {
     private String password;
     private String accountType;
     private String accountId;
+    private String confirmation;
+    private String email;
+    private boolean accountStatus = false;
 
     public User(){
 
     }
 
-    public User(String username, String password, String accountType, String accountId) {
+    public User(String username, String password, String accountType, String accountId,String confirmation,String mail) {
         this.username = username;
         this.password = password;
         this.accountType = accountType;
         this.accountId = accountId;
+        this.confirmation = confirmation;
+        this.email = mail;
     }
 
     public String getUsername() {
@@ -51,5 +56,21 @@ public class User {
 
     public void setAccountId(String accountId) {
         this.accountId = accountId;
+    }
+
+    public String getConfirmation() {
+        return confirmation;
+    }
+
+    public void setConfirmation(String confirmation) {
+        this.confirmation = confirmation;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

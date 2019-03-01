@@ -10,6 +10,7 @@ import com.charith.ordee.repository.ChefRepository;
 import com.charith.ordee.repository.CustomerRepository;
 import com.charith.ordee.repository.MerchantRepository;
 import com.charith.ordee.repository.UserRepository;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,10 @@ public class AuthService {
     private MerchantRepository merchantRepository;
     @Autowired
     private ChefRepository chefRepository;
+    @Autowired
+    private EmailService emailService;
     public ResponseEntity register(UserDTO userDTO){
+        String confirmation = RandomStringUtils.random(12);
         if(userDTO.getUserType().equals("customer")){
             if(userRepository.existsByUsername(userDTO.getUsername())){
                 logger.info("User Exists"+userDTO.getUsername());
@@ -35,8 +39,9 @@ public class AuthService {
             }
             int customerID = 1000 + userRepository.countAllByAccountType(userDTO.getUserType());
             Customer customer = new Customer(Integer.toString(customerID),userDTO.getName(),userDTO.getUserAddress(),userDTO.getUserTel());
-            User user = new User(userDTO.getUsername(),userDTO.getPassword(),userDTO.getUserType(),Integer.toString(customerID));
+            User user = new User(userDTO.getUsername(),userDTO.getPassword(),userDTO.getUserType(),Integer.toString(customerID),confirmation,userDTO.getEmail());
             userRepository.save(user);
+            emailService.sendConfirmation(user);
             customerRepository.save(customer);
             return new ResponseEntity(HttpStatus.OK);
         }
@@ -47,8 +52,9 @@ public class AuthService {
             }
             int merchantID = 3000 + userRepository.countAllByAccountType(userDTO.getUserType());
             Merchant merchant = new Merchant(Integer.toString(merchantID),userDTO.getName(),userDTO.getUserAddress(),userDTO.getUserTel());
-            User user = new User(userDTO.getUsername(),userDTO.getPassword(),userDTO.getUserType(),Integer.toString(merchantID));
+            User user = new User(userDTO.getUsername(),userDTO.getPassword(),userDTO.getUserType(),Integer.toString(merchantID),confirmation,userDTO.getEmail());
             userRepository.save(user);
+            emailService.sendConfirmation(user);
             merchantRepository.save(merchant);
             return new ResponseEntity(HttpStatus.OK);
         }
@@ -59,8 +65,9 @@ public class AuthService {
             }
             int chefID = 5000 + userRepository.countAllByAccountType(userDTO.getUserType());
             Chef chef = new Chef(Integer.toString(chefID),userDTO.getName(),userDTO.getUserAddress(),userDTO.getUserTel());
-            User user = new User(userDTO.getUsername(),userDTO.getPassword(),userDTO.getUserType(),Integer.toString(chefID));
+            User user = new User(userDTO.getUsername(),userDTO.getPassword(),userDTO.getUserType(),Integer.toString(chefID),confirmation,userDTO.getEmail());
             userRepository.save(user);
+            emailService.sendConfirmation(user);
             chefRepository.save(chef);
             return new ResponseEntity(HttpStatus.OK);
         }

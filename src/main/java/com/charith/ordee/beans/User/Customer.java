@@ -11,6 +11,7 @@ public class Customer {
     private String address;
     private String telephoneNo;
 
+
     public Customer(){
 
     }
@@ -19,6 +20,7 @@ public class Customer {
         this.customerName = customerName;
         this.address = address;
         this.telephoneNo = telephoneNo;
+
     }
 
     public String getCustomerId() {
@@ -52,4 +54,6 @@ public class Customer {
     public void setTelephoneNo(String telephoneNo) {
         this.telephoneNo = telephoneNo;
     }
+
+
 }
