@@ -1,9 +1,9 @@
 package com.charith.ordee.services;
 
-import com.charith.ordee.beans.User.Chef;
-import com.charith.ordee.beans.User.Customer;
-import com.charith.ordee.beans.User.Merchant;
-import com.charith.ordee.beans.User.User;
+import com.charith.ordee.beans.user.Chef;
+import com.charith.ordee.beans.user.Customer;
+import com.charith.ordee.beans.user.Merchant;
+import com.charith.ordee.beans.user.User;
 import com.charith.ordee.beans.dto.LoginDTO;
 import com.charith.ordee.beans.dto.UserDTO;
 import com.charith.ordee.repository.ChefRepository;
@@ -12,11 +12,13 @@ import com.charith.ordee.repository.MerchantRepository;
 import com.charith.ordee.repository.UserRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import com.charith.ordee.services.EmailService;
 @Service
 public class AuthService {
     private Logger logger = LogManager.getLogger();
@@ -30,12 +32,16 @@ public class AuthService {
     private ChefRepository chefRepository;
     @Autowired
     private EmailService emailService;
+
+    private HttpHeaders headers = new HttpHeaders();
+
     public ResponseEntity register(UserDTO userDTO){
+        headers.add("Access-Control-Allow-Origin", "*");
         String confirmation = RandomStringUtils.random(12);
         if(userDTO.getUserType().equals("customer")){
             if(userRepository.existsByUsername(userDTO.getUsername())){
-                logger.info("User Exists"+userDTO.getUsername());
-                return new ResponseEntity("User Exists Username : ",HttpStatus.NOT_ACCEPTABLE);
+                logger.info("user Exists"+userDTO.getUsername());
+                return new ResponseEntity("user Exists Username : ",headers,HttpStatus.NOT_ACCEPTABLE);
             }
             int customerID = 1000 + userRepository.countAllByAccountType(userDTO.getUserType());
             Customer customer = new Customer(Integer.toString(customerID),userDTO.getName(),userDTO.getUserAddress(),userDTO.getUserTel());
@@ -43,12 +49,12 @@ public class AuthService {
             userRepository.save(user);
             emailService.sendConfirmation(user);
             customerRepository.save(customer);
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(headers,HttpStatus.OK);
         }
         else if(userDTO.getUserType().equals("merchant")){
             if(userRepository.existsByUsername(userDTO.getUsername())){
-                logger.info("User Exists"+userDTO.getUsername());
-                return new ResponseEntity("User Exists Username : ",HttpStatus.NOT_ACCEPTABLE);
+                logger.info("user Exists"+userDTO.getUsername());
+                return new ResponseEntity("user Exists Username : ",headers,HttpStatus.NOT_ACCEPTABLE);
             }
             int merchantID = 3000 + userRepository.countAllByAccountType(userDTO.getUserType());
             Merchant merchant = new Merchant(Integer.toString(merchantID),userDTO.getName(),userDTO.getUserAddress(),userDTO.getUserTel());
@@ -56,12 +62,12 @@ public class AuthService {
             userRepository.save(user);
             emailService.sendConfirmation(user);
             merchantRepository.save(merchant);
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(headers,HttpStatus.OK);
         }
         else if(userDTO.getUserType().equals("chef")){
             if(userRepository.existsByUsername(userDTO.getUsername())){
-                logger.info("User Exists"+userDTO.getUsername());
-                return new ResponseEntity("User Exists Username : ",HttpStatus.NOT_ACCEPTABLE);
+                logger.info("user Exists"+userDTO.getUsername());
+                return new ResponseEntity("user Exists Username : ",headers,HttpStatus.NOT_ACCEPTABLE);
             }
             int chefID = 5000 + userRepository.countAllByAccountType(userDTO.getUserType());
             Chef chef = new Chef(Integer.toString(chefID),userDTO.getName(),userDTO.getUserAddress(),userDTO.getUserTel());
@@ -69,17 +75,17 @@ public class AuthService {
             userRepository.save(user);
             emailService.sendConfirmation(user);
             chefRepository.save(chef);
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(headers,HttpStatus.OK);
         }
         else {
-            logger.info("User Type not valid");
-            return new ResponseEntity("User type not valid",HttpStatus.NOT_ACCEPTABLE);
+            logger.info("user Type not valid");
+            return new ResponseEntity("user type not valid",headers,HttpStatus.NOT_ACCEPTABLE);
         }
     }
 
     public ResponseEntity login(LoginDTO loginDTO){
         logger.info(loginDTO.getUsername() + " trying to log in using password : "+ loginDTO.getPassword());
-
+        headers.add("Access-Control-Allow-Origin", "*");
         if(userRepository.existsByUsername(loginDTO.getUsername())){
             User user = userRepository.getByUsername(loginDTO.getUsername());
             if(user.getPassword().equals(loginDTO.getPassword())){
@@ -88,22 +94,22 @@ public class AuthService {
                 if(userType.equals("customer")){
                     Customer customer = customerRepository.getCustomerByCustomerId(userId);
                     logger.info("Logged in successfully : "+ customer.getCustomerName());
-                    return new ResponseEntity(customer,HttpStatus.OK);
+                    return new ResponseEntity(customer,headers,HttpStatus.OK);
                 }else if(userType.equals("merchant")){
                     Merchant merchant = merchantRepository.getMerchantByMerchantID(userId);
                     logger.info("Logged in successfully : "+ merchant.getMerchantName());
-                    return new ResponseEntity(merchant,HttpStatus.OK);
+                    return new ResponseEntity(merchant,headers,HttpStatus.OK);
                 }else if(userType.equals("chef")){
                     Chef chef = chefRepository.getChefByChefID(userId);
                     logger.info("Logged in successfully : "+ chef.getChefName());
-                    return new ResponseEntity(chef,HttpStatus.OK);
+                    return new ResponseEntity(chef,headers,HttpStatus.OK);
                 }
             }else{
-                return new ResponseEntity("Bad login credentials",HttpStatus.BAD_REQUEST);
             }
         }else{
-            return new ResponseEntity("No user exists for this username",HttpStatus.BAD_REQUEST);
+
+            return new ResponseEntity("No user exists for this username",headers,HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(headers,HttpStatus.OK);
     }
 }

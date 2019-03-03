@@ -1,4 +1,4 @@
-package com.charith.ordee.beans.User;
+package com.charith.ordee.beans.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

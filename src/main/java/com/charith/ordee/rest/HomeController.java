@@ -19,6 +19,7 @@ public class HomeController {
 
     @PostMapping("login")
     public ResponseEntity login(@RequestBody LoginDTO loginDTO){
+        System.out.println(loginDTO);
         ResponseEntity res = authService.login(loginDTO);
         return res;
     }

@@ -1,6 +1,6 @@
 package com.charith.ordee.repository;
 
-import com.charith.ordee.beans.User.User;
+import com.charith.ordee.beans.user.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User,String> {
