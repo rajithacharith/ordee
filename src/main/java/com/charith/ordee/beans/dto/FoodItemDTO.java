@@ -1,25 +1,10 @@
-package com.charith.ordee.beans;
+package com.charith.ordee.beans.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.ArrayList;
-@Entity
-public class FoodItemBean {
-    @Id
-    private String foodItemID;
+public class FoodItemDTO {
     private String foodItemName;
     private String description;
-    private String merchantID;
     private int price;
-
-
-    public String getFoodItemID() {
-        return foodItemID;
-    }
-
-    public void setFoodItemID(String foodItemID) {
-        this.foodItemID = foodItemID;
-    }
+    private String merchantID;
 
     public String getFoodItemName() {
         return foodItemName;
@@ -37,19 +22,19 @@ public class FoodItemBean {
         this.description = description;
     }
 
-    public String getMerchantID() {
-        return merchantID;
-    }
-
-    public void setMerchantID(String merchantID) {
-        this.merchantID = merchantID;
-    }
-
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getMerchantID() {
+        return merchantID;
+    }
+
+    public void setMerchantID(String merchantID) {
+        this.merchantID = merchantID;
     }
 }

@@ -11,7 +11,9 @@ public class Merchant {
     private String merchantName;
     private String merchantAdderss;
     private String merchantTelephoneNo;
+    public Merchant(){
 
+    }
 
     public String getMerchantID() {
         return merchantID;

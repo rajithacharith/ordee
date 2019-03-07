@@ -36,8 +36,8 @@ public class AuthService {
     private HttpHeaders headers = new HttpHeaders();
 
     public ResponseEntity register(UserDTO userDTO){
-        headers.add("Access-Control-Allow-Origin", "*");
-        String confirmation = RandomStringUtils.random(12);
+
+        String confirmation = RandomStringUtils.randomAlphabetic(8);
         if(userDTO.getUserType().equals("customer")){
             if(userRepository.existsByUsername(userDTO.getUsername())){
                 logger.info("user Exists"+userDTO.getUsername());
@@ -85,7 +85,7 @@ public class AuthService {
 
     public ResponseEntity login(LoginDTO loginDTO){
         logger.info(loginDTO.getUsername() + " trying to log in using password : "+ loginDTO.getPassword());
-        headers.add("Access-Control-Allow-Origin", "*");
+
         if(userRepository.existsByUsername(loginDTO.getUsername())){
             User user = userRepository.getByUsername(loginDTO.getUsername());
             if(user.getPassword().equals(loginDTO.getPassword())){

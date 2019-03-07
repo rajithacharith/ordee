@@ -1,5 +1,7 @@
 package com.charith.ordee.beans.dto;
 
+
+
 public class UserDTO {
     private String username;
     private String password;

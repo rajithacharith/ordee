@@ -1,5 +1,8 @@
 package com.charith.ordee.rest;
 
+import com.charith.ordee.beans.dto.FoodItemDTO;
+import com.charith.ordee.services.FoodItemService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -7,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/merchant")
 public class MerchantController {
+    @Autowired
+    private FoodItemService foodItemService;
     @PostMapping("/addFoodItem")
-    public ResponseEntity addFoodItem(){
-
+    public ResponseEntity addFoodItem(@RequestBody FoodItemDTO foodItemDTO){
+        foodItemService.addFoodItem(foodItemDTO);
         return new ResponseEntity(HttpStatus.OK);
     }
     @PostMapping("/changeFoodDetails")
