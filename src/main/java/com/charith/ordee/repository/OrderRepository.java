@@ -11,4 +11,5 @@ public interface OrderRepository extends CrudRepository<OrderBean,String> {
     List getAllByChefID(String chefID);
     List getAllByOrderID(OrderID orderID);
     void removeByOrderID(OrderID orderID);
+    List getAllByCustomerID(String customerID);
 }

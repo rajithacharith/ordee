@@ -73,5 +73,10 @@ public class OrderService {
         return new ResponseEntity("Order deleted successfully",HttpStatus.OK);
     }
 
+    public ResponseEntity getOrderByCustomer(String customerID){
+        orderRepository.getAllByCustomerID(customerID);
+        return new ResponseEntity("",HttpStatus.OK);
+    }
+
 
 }

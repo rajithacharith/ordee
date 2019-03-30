@@ -7,8 +7,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.util.Date;
+import java.util.Observable;
+
 @Entity
-public class OrderBean {
+public class OrderBean extends Observable {
     @EmbeddedId
     private OrderID orderID;
     private String customerID;
@@ -96,6 +98,8 @@ public class OrderBean {
 
     public void setStatus(String status) {
         this.status = status;
+        setChanged();
+        notifyObservers();
     }
 
     public Date getDate() {

@@ -2,8 +2,11 @@ package com.charith.ordee.beans.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Observable;
+import java.util.Observer;
+
 @Entity
-public class Chef {
+public class Chef implements Observer {
     @Id
     private String chefID;
     private String chefName;
@@ -58,4 +61,8 @@ public class Chef {
         this.chefTelephoneNo = chefTelephoneNo;
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
 }
