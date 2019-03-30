@@ -9,13 +9,21 @@ public class Chef {
     private String chefName;
     private String chefAdderss;
     private String chefTelephoneNo;
-
+    private String merchantID;
 
     public Chef(String chefID, String chefName, String chefAdderss, String chefTelephoneNo) {
         this.chefID = chefID;
         this.chefName = chefName;
         this.chefAdderss = chefAdderss;
         this.chefTelephoneNo = chefTelephoneNo;
+    }
+
+    public Chef(String chefID, String chefName, String chefAdderss, String chefTelephoneNo, String merchantID) {
+        this.chefID = chefID;
+        this.chefName = chefName;
+        this.chefAdderss = chefAdderss;
+        this.chefTelephoneNo = chefTelephoneNo;
+        this.merchantID = merchantID;
     }
 
     public String getChefID() {

@@ -12,13 +12,43 @@ public class OrderBean {
     @EmbeddedId
     private OrderID orderID;
     private String customerID;
-    private String merchatnID;
+    private String merchantID;
     private String foodItemID;
     private String chefID;
     private int quantity;
     private String status;
     @JsonIgnore
     private Date date;
+
+    public OrderBean(){
+    }
+
+    public OrderBean(OrderID orderID, String customerID, String merchantID, String foodItemID, String chefID, int quantity, String status, Date date) {
+        this.orderID = orderID;
+        this.customerID = customerID;
+        this.merchantID = merchantID;
+        this.foodItemID = foodItemID;
+        this.chefID = chefID;
+        this.quantity = quantity;
+        this.status = status;
+        this.date = date;
+    }
+
+    public OrderID getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(OrderID orderID) {
+        this.orderID = orderID;
+    }
+
+    public String getMerchantID() {
+        return merchantID;
+    }
+
+    public void setMerchantID(String merchantID) {
+        this.merchantID = merchantID;
+    }
 
     public String getCustomerID() {
         return customerID;
@@ -29,11 +59,11 @@ public class OrderBean {
     }
 
     public String getMerchatnID() {
-        return merchatnID;
+        return merchantID;
     }
 
-    public void setMerchatnID(String merchatnID) {
-        this.merchatnID = merchatnID;
+    public void setMerchatnID(String merchantID) {
+        this.merchantID = merchantID;
     }
 
     public String getFoodItemID() {

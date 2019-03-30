@@ -12,7 +12,6 @@ public class Merchant {
     private String merchantAdderss;
     private String merchantTelephoneNo;
     public Merchant(){
-
     }
 
     public String getMerchantID() {

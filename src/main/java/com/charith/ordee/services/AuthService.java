@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import com.charith.ordee.services.EmailService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Service
 public class AuthService {
     private Logger logger = LogManager.getLogger();
@@ -33,10 +34,12 @@ public class AuthService {
     @Autowired
     private EmailService emailService;
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     private HttpHeaders headers = new HttpHeaders();
 
     public ResponseEntity register(UserDTO userDTO){
-
+        String encryptedPassword = bCryptPasswordEncoder.encode(userDTO.getPassword());
+        userDTO.setPassword(encryptedPassword);
         String confirmation = RandomStringUtils.randomAlphabetic(8);
         if(userDTO.getUserType().equals("customer")){
             if(userRepository.existsByUsername(userDTO.getUsername())){
@@ -88,7 +91,7 @@ public class AuthService {
 
         if(userRepository.existsByUsername(loginDTO.getUsername())){
             User user = userRepository.getByUsername(loginDTO.getUsername());
-            if(user.getPassword().equals(loginDTO.getPassword())){
+            if(bCryptPasswordEncoder.matches(loginDTO.getPassword(),user.getPassword())){
                 String userType = user.getAccountType();
                 String userId = user.getAccountId();
                 if(userType.equals("customer")){

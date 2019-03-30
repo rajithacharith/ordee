@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface ChefRepository extends CrudRepository<Chef,String> {
     Chef save(Chef chef);
     Chef getChefByChefID(String chefID);
+    Chef getChefByMerchantID(String merchantID);
 }

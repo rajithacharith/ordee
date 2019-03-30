@@ -10,6 +10,14 @@ public class OrderID implements Serializable {
     @Column(name = "foodItemNo")
     private String foodItemID;
 
+    public OrderID(String orderID, String foodItemID) {
+        this.orderID = orderID;
+        this.foodItemID = foodItemID;
+    }
+    public OrderID(){
+
+    }
+
     public String getOrderID() {
         return orderID;
     }

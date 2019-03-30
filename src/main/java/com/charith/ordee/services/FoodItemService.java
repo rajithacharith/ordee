@@ -27,4 +27,8 @@ public class FoodItemService {
         foodItemRepository.save(foodItemBean);
         return new ResponseEntity("Food Item Added Successfully!",HttpStatus.OK);
     }
+
+    public ResponseEntity removeFoodItem(){
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
