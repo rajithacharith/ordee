@@ -14,8 +14,8 @@ public class MerchantController {
     private FoodItemService foodItemService;
     @PostMapping("/addFoodItem")
     public ResponseEntity addFoodItem(@RequestBody FoodItemDTO foodItemDTO){
-        foodItemService.addFoodItem(foodItemDTO);
-        return new ResponseEntity(HttpStatus.OK);
+        ResponseEntity response = foodItemService.addFoodItem(foodItemDTO);
+        return response;
     }
     @PostMapping("/changeFoodDetails")
     public ResponseEntity changeFoodDetails(){
@@ -33,5 +33,10 @@ public class MerchantController {
     @GetMapping("/topSellingFoods")
     public ResponseEntity topFoods(){
         return new ResponseEntity("HelloWorld",HttpStatus.OK);
+    }
+    @GetMapping("/checkFoodItems")
+    public ResponseEntity foodItems(@RequestParam("merchantID") String merchantID){
+        ResponseEntity response = foodItemService.getFoodItemsByMerchant(merchantID);
+        return response;
     }
 }

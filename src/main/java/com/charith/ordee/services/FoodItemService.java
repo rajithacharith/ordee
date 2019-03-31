@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FoodItemService {
     @Autowired
@@ -17,7 +19,7 @@ public class FoodItemService {
 
     public ResponseEntity addFoodItem(FoodItemDTO foodItemDTO){
         FoodItemBean foodItemBean = new FoodItemBean();
-        int count = RandomUtils.nextInt();
+        int count = (int) foodItemRepository.count();
         String foodItemId = Integer.toString(count+1);
         foodItemBean.setFoodItemID(foodItemId);
         foodItemBean.setMerchantID(foodItemDTO.getMerchantID());
@@ -30,5 +32,10 @@ public class FoodItemService {
 
     public ResponseEntity removeFoodItem(){
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    public ResponseEntity getFoodItemsByMerchant(String merchantID){
+        List foodItem = foodItemRepository.getAllByMerchantID(merchantID);
+        return new ResponseEntity(foodItem,HttpStatus.OK);
     }
 }
