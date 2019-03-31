@@ -1,5 +1,6 @@
 package com.charith.ordee.rest;
 
+import com.charith.ordee.beans.compositeKeys.OrderID;
 import com.charith.ordee.beans.dto.OrderDTO;
 import com.charith.ordee.services.OrderService;
 import org.hibernate.criterion.Order;
@@ -23,8 +24,9 @@ public class CustomerController {
         return orderService.addOrder(orderDTO);
     }
 
-    public ResponseEntity cancelOrder(){
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity cancelOrder(@RequestBody String orderID,String foodItemID){
+        ResponseEntity responseEntity = orderService.cancleOrder(orderID,foodItemID);
+        return responseEntity;
     }
 
 }

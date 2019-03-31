@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import com.charith.ordee.services.EmailService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-@Service
+@Service("authService")
 public class AuthService {
     private Logger logger = LogManager.getLogger();
     @Autowired
@@ -88,7 +88,7 @@ public class AuthService {
 
     public ResponseEntity login(LoginDTO loginDTO){
         logger.info(loginDTO.getUsername() + " trying to log in using password : "+ loginDTO.getPassword());
-
+        ResponseEntity res = null;
         if(userRepository.existsByUsername(loginDTO.getUsername())){
             User user = userRepository.getByUsername(loginDTO.getUsername());
             if(bCryptPasswordEncoder.matches(loginDTO.getPassword(),user.getPassword())){
@@ -97,22 +97,22 @@ public class AuthService {
                 if(userType.equals("customer")){
                     Customer customer = customerRepository.getCustomerByCustomerId(userId);
                     logger.info("Logged in successfully : "+ customer.getCustomerName());
-                    return new ResponseEntity(customer,headers,HttpStatus.OK);
+                    res = new ResponseEntity(customer,headers,HttpStatus.OK);
                 }else if(userType.equals("merchant")){
                     Merchant merchant = merchantRepository.getMerchantByMerchantID(userId);
                     logger.info("Logged in successfully : "+ merchant.getMerchantName());
-                    return new ResponseEntity(merchant,headers,HttpStatus.OK);
+                    res = new ResponseEntity(merchant,headers,HttpStatus.OK);
                 }else if(userType.equals("chef")){
                     Chef chef = chefRepository.getChefByChefID(userId);
                     logger.info("Logged in successfully : "+ chef.getChefName());
-                    return new ResponseEntity(chef,headers,HttpStatus.OK);
+                    res =  new ResponseEntity(chef,headers,HttpStatus.OK);
                 }
             }else{
+                res = new ResponseEntity("Invalid",headers,HttpStatus.BAD_REQUEST);
             }
         }else{
-
-            return new ResponseEntity("No user exists for this username",headers,HttpStatus.BAD_REQUEST);
+            res = new ResponseEntity("No user exists for this username",headers,HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity(headers,HttpStatus.OK);
+        return res;
     }
 }
