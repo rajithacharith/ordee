@@ -44,4 +44,14 @@ public class MerchantControllerTest extends AbstractTest {
         assertEquals(200, status);
         System.out.println(mvcResult.getResponse().getContentAsString());
     }
+
+    @Test
+    public void getOrderbyMerchantIDTest() throws Exception {
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/api/merchant/checkOrders")
+                .param("merchantID","5001")).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200, status);
+        System.out.println(mvcResult.getResponse().getContentAsString());
+    }
 }

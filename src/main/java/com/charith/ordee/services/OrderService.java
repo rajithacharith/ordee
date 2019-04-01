@@ -95,9 +95,11 @@ public class OrderService {
     public ResponseEntity checkOrder(String orderID){
         List order = orderRepository.getAllByOrderIDOrderID(orderID);
         return new ResponseEntity(order,HttpStatus.OK);
+    }
 
-
-
+    public ResponseEntity getOrderByMerchantId(String merchantID){
+        List order = orderRepository.getAllByMerchantID(merchantID);
+        return new ResponseEntity(order,HttpStatus.OK);
     }
 
 
