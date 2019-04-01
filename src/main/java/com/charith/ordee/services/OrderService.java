@@ -9,6 +9,9 @@ import com.charith.ordee.repository.ChefRepository;
 import com.charith.ordee.repository.FoodItemRepository;
 import com.charith.ordee.repository.MerchantRepository;
 import com.charith.ordee.repository.OrderRepository;
+import org.hibernate.Session;
+
+import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,9 @@ import org.springframework.stereotype.Service;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,27 +36,30 @@ public class OrderService {
     private OrderRepository orderRepository;
     @Autowired
     private ChefRepository chefRepository;
+
+
+
     Logger logger = LogManager.getLogger();
     public ResponseEntity addOrder(OrderDTO orderDTO){
-        List<String> foodItems = orderDTO.getFoodItemID();
-        List<Integer> quantiy = orderDTO.getQuantity();
-        HashMap<String,Integer> orderDetails = new HashMap<>();
+        HashMap<String,Integer> orderDetails = orderDTO.getData();
         int orderID = (int) (orderRepository.count()+new Long(1));
         Chef chef = chefRepository.getChefByMerchantID(orderDTO.getMerchantID());
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         String stringDate = dateFormat.format(date);
+        System.out.println("Order adding");
 
+        for(String i : orderDetails.keySet()){
+            OrderID orderID1 = new OrderID(String.valueOf(orderID),i);
+            OrderBean orderBean = new OrderBean();
+            orderBean.setOrderID(orderID1);
+            orderBean.setCustomerID(orderDTO.getCustomerID());
+            orderBean.setMerchantID(orderDTO.getMerchantID());
+            orderBean.setFoodItemID(i);
 
-
-
-        for(int i = 0; i <= foodItems.size();i++){
-            orderDetails.put(foodItems.get(i),quantiy.get(i));
-            logger.info(foodItems.get(i)+" : "+quantiy.get(i));
-            OrderID id = new OrderID(String.valueOf(orderID),foodItems.get(i));
-            OrderBean orderBean = new OrderBean(id,orderDTO.getCustomerID(),orderDTO.getMerchantID(),foodItems.get(i),chef.getChefID(),quantiy.get(i),"Queued",date);
+            orderBean.setQuantity(orderDetails.get(i));
+            orderBean.setStatus("Queued");
             orderRepository.save(orderBean);
-
         }
 
         //TODO:: Add observer observable to notify chef and merchants.
@@ -69,13 +78,26 @@ public class OrderService {
         OrderID orderID = new OrderID();
         orderID.setOrderID(orderNo);
         orderID.setFoodItemID(foodItemID);
-        orderRepository.removeByOrderID(orderID);
+        System.out.println("Deleting");
+        List<OrderBean> orderBeanList = orderRepository.getAllByOrderID(orderID);
+
+        for(OrderBean order : orderBeanList){
+            orderRepository.delete(order);
+        }
         return new ResponseEntity("Order deleted successfully",HttpStatus.OK);
     }
 
     public ResponseEntity getOrderByCustomer(String customerID){
         orderRepository.getAllByCustomerID(customerID);
         return new ResponseEntity("",HttpStatus.OK);
+    }
+
+    public ResponseEntity checkOrder(String orderID){
+        List order = orderRepository.getAllByOrderIDOrderID(orderID);
+        return new ResponseEntity(order,HttpStatus.OK);
+
+
+
     }
 
 

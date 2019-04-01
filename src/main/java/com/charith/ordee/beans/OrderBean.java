@@ -23,6 +23,7 @@ public class OrderBean extends Observable {
     private Date date;
 
     public OrderBean(){
+
     }
 
     public OrderBean(OrderID orderID, String customerID, String merchantID, String foodItemID, String chefID, int quantity, String status, Date date) {

@@ -6,11 +6,12 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface OrderRepository extends CrudRepository<OrderBean,String> {
+public interface OrderRepository extends CrudRepository<OrderBean,OrderID> {
     OrderBean save(OrderBean orderBean);
     List getAllByChefID(String chefID);
     List getAllByOrderID(OrderID orderID);
     void removeByOrderID(OrderID orderID);
     List getAllByCustomerID(String customerID);
     List getAllByMerchantID(String merchatnID);
+    List getAllByOrderIDOrderID(String orderID);
 }
