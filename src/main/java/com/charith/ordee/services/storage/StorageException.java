@@ -1,4 +1,4 @@
-package hello.storage;
+package com.charith.ordee.services.storage;
 
 public class StorageException extends RuntimeException {
 

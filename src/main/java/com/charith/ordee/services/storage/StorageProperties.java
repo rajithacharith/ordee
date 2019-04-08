@@ -1,8 +1,10 @@
-package hello.storage;
+package com.charith.ordee.services.storage;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Service;
 
-@ConfigurationProperties("storage")
+@Service
 public class StorageProperties {
 
     /**
