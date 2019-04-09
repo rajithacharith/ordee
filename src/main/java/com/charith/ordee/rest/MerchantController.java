@@ -23,6 +23,7 @@ public class MerchantController {
     private OrderService orderService;
     @PostMapping("/addFoodItem")
     public ResponseEntity addFoodItem(@RequestBody FoodItemDTO foodItemDTO){
+        System.out.println(foodItemDTO.getFoodName());
         ResponseEntity response = foodItemService.addFoodItem(foodItemDTO);
         return response;
     }

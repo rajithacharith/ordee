@@ -23,7 +23,7 @@ public class MerchantControllerTest extends AbstractTest {
     @Test
     public void addFoodItemTest() throws Exception {
         FoodItemDTO foodItemDTO = new FoodItemDTO();
-        foodItemDTO.setFoodItemName("Rice");
+        foodItemDTO.setFoodName("Rice");
         foodItemDTO.setDescription("Bla bla bla");
         foodItemDTO.setPrice(200);
         foodItemDTO.setMerchantID("5001");

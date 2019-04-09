@@ -1,17 +1,18 @@
 package com.charith.ordee.beans.dto;
 
 public class FoodItemDTO {
-    private String foodItemName;
+    private String foodName;
     private String description;
     private int price;
     private String merchantID;
+    private String[] image;
 
-    public String getFoodItemName() {
-        return foodItemName;
+    public String getFoodName() {
+        return foodName;
     }
 
-    public void setFoodItemName(String foodItemName) {
-        this.foodItemName = foodItemName;
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
     }
 
     public String getDescription() {
@@ -36,5 +37,13 @@ public class FoodItemDTO {
 
     public void setMerchantID(String merchantID) {
         this.merchantID = merchantID;
+    }
+
+    public String[] getImage() {
+        return image;
+    }
+
+    public void setImage(String[] image) {
+        this.image = image;
     }
 }

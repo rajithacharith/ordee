@@ -23,7 +23,7 @@ public class FoodItemService {
         String foodItemId = Integer.toString(count+1);
         foodItemBean.setFoodItemID(foodItemId);
         foodItemBean.setMerchantID(foodItemDTO.getMerchantID());
-        foodItemBean.setFoodItemName(foodItemDTO.getFoodItemName());
+        foodItemBean.setFoodItemName(foodItemDTO.getFoodName());
         foodItemBean.setDescription(foodItemDTO.getDescription());
         foodItemBean.setPrice(foodItemDTO.getPrice());
         foodItemRepository.save(foodItemBean);
