@@ -5,7 +5,7 @@ public class FoodItemDTO {
     private String description;
     private int price;
     private String merchantID;
-    private String[] image;
+    private String image;
 
     public String getFoodName() {
         return foodName;
@@ -39,11 +39,11 @@ public class FoodItemDTO {
         this.merchantID = merchantID;
     }
 
-    public String[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(String[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

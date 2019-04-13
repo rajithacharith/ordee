@@ -25,6 +25,7 @@ public class MerchantController {
     public ResponseEntity addFoodItem(@RequestBody FoodItemDTO foodItemDTO){
         System.out.println(foodItemDTO.getFoodName());
         ResponseEntity response = foodItemService.addFoodItem(foodItemDTO);
+        System.out.println(foodItemDTO.getImage());
         return response;
     }
     @PostMapping("/changeFoodDetails")

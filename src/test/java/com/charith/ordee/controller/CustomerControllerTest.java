@@ -30,7 +30,7 @@ public class CustomerControllerTest extends AbstractTest {
         HashMap<String,Integer> data = new HashMap<>();
         data.put("1",4);
         data.put("2",5);
-        orderDTO.setData(data);
+
         orderDTO.setCustomerID("1001");
         orderDTO.setMerchantID("3001");
         String json = mapToJson(orderDTO);

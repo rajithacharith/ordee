@@ -26,8 +26,9 @@ public class FoodItemService {
         foodItemBean.setFoodItemName(foodItemDTO.getFoodName());
         foodItemBean.setDescription(foodItemDTO.getDescription());
         foodItemBean.setPrice(foodItemDTO.getPrice());
+        foodItemBean.setImage(foodItemDTO.getImage());
         foodItemRepository.save(foodItemBean);
-        return new ResponseEntity("Food Item Added Successfully!",HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     public ResponseEntity removeFoodItem(){

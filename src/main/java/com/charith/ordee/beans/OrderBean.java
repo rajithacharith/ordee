@@ -6,13 +6,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 import java.util.Observable;
 
 @Entity
 public class OrderBean extends Observable {
-    @EmbeddedId
-    private OrderID orderID;
+    @Id
+    private String orderID;
     private String customerID;
     private String merchantID;
     private String foodItemID;
@@ -26,7 +27,7 @@ public class OrderBean extends Observable {
 
     }
 
-    public OrderBean(OrderID orderID, String customerID, String merchantID, String foodItemID, String chefID, int quantity, String status, Date date) {
+    public OrderBean(String orderID, String customerID, String merchantID, String foodItemID, String chefID, int quantity, String status, Date date) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.merchantID = merchantID;
@@ -37,11 +38,11 @@ public class OrderBean extends Observable {
         this.date = date;
     }
 
-    public OrderID getOrderID() {
+    public String getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(OrderID orderID) {
+    public void setOrderID(String orderID) {
         this.orderID = orderID;
     }
 

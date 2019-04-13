@@ -1,14 +1,13 @@
 package com.charith.ordee.beans.dto;
 
-import java.util.HashMap;
-import java.util.List;
 
 public class OrderDTO {
-    private HashMap<String,Integer> data;
+
 
     private String customerID;
     private String merchantID;
-
+    private String fooditemID;
+    private int quantity;
 
 
     public String getCustomerID() {
@@ -27,12 +26,19 @@ public class OrderDTO {
         this.merchantID = merchantID;
     }
 
-
-    public HashMap<String, Integer> getData() {
-        return data;
+    public String getFooditemID() {
+        return fooditemID;
     }
 
-    public void setData(HashMap<String, Integer> data) {
-        this.data = data;
+    public void setFooditemID(String fooditemID) {
+        this.fooditemID = fooditemID;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

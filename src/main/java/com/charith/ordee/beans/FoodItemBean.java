@@ -1,5 +1,7 @@
 package com.charith.ordee.beans;
 
+import org.springframework.scheduling.support.SimpleTriggerContext;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ public class FoodItemBean {
     private String description;
     private String merchantID;
     private int price;
+    private String image;
 
 
     public String getFoodItemID() {
@@ -51,5 +54,13 @@ public class FoodItemBean {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
