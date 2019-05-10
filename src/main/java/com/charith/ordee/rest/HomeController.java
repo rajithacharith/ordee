@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.nio.file.Path;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/")
 public class HomeController {

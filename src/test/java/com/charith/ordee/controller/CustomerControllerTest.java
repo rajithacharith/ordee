@@ -24,24 +24,7 @@ public class CustomerControllerTest extends AbstractTest {
     public void setup(){
         super.setUp();
     }
-    @Test
-    public void addOrderTest() throws Exception {
-        OrderDTO orderDTO = new OrderDTO();
-        HashMap<String,Integer> data = new HashMap<>();
-        data.put("1",4);
-        data.put("2",5);
 
-        orderDTO.setCustomerID("1001");
-        orderDTO.setMerchantID("3001");
-        String json = mapToJson(orderDTO);
-        System.out.println(json);
-        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post("/api/customer/addOrder")
-                .contentType(MediaType.APPLICATION_JSON_VALUE).content(json)).andReturn();
-
-        int status = mvcResult.getResponse().getStatus();
-        assertEquals(200, status);
-        System.out.println(mvcResult.getResponse().getContentAsString());
-    }
     @Test
     public void cancleOrderTest() throws Exception{
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/api/customer/cancleOrder")

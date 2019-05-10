@@ -18,7 +18,6 @@ public class OrderBean extends Observable {
     private String merchantID;
     private String foodItemID;
     private String chefID;
-    private int quantity;
     private String status;
     @JsonIgnore
     private Date date;
@@ -27,13 +26,13 @@ public class OrderBean extends Observable {
 
     }
 
-    public OrderBean(String orderID, String customerID, String merchantID, String foodItemID, String chefID, int quantity, String status, Date date) {
+    public OrderBean(String orderID, String customerID, String merchantID, String foodItemID, String chefID,  String status, Date date) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.merchantID = merchantID;
         this.foodItemID = foodItemID;
         this.chefID = chefID;
-        this.quantity = quantity;
+
         this.status = status;
         this.date = date;
     }
@@ -86,13 +85,7 @@ public class OrderBean extends Observable {
         this.chefID = chefID;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public String getStatus() {
         return status;

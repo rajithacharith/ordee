@@ -4,19 +4,9 @@ package com.charith.ordee.beans.dto;
 public class OrderDTO {
 
 
-    private String customerID;
+
     private String merchantID;
-    private String fooditemID;
-    private int quantity;
-
-
-    public String getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
-    }
+    private String foodItemID;
 
     public String getMerchantID() {
         return merchantID;
@@ -26,19 +16,11 @@ public class OrderDTO {
         this.merchantID = merchantID;
     }
 
-    public String getFooditemID() {
-        return fooditemID;
+    public String getFoodItemID() {
+        return foodItemID;
     }
 
-    public void setFooditemID(String fooditemID) {
-        this.fooditemID = fooditemID;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setFoodItemID(String foodItemID) {
+        this.foodItemID = foodItemID;
     }
 }
