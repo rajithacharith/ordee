@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/merchant")
@@ -53,7 +55,7 @@ public class MerchantController {
         return new ResponseEntity("HelloWorld",HttpStatus.OK);
     }
     @GetMapping("/checkFoodItems")
-    public ResponseEntity foodItems(@RequestParam("merchantID") String merchantID){
+    public ResponseEntity foodItems(@RequestParam("merchantID") String merchantID) throws IOException {
         ResponseEntity response = foodItemService.getFoodItemsByMerchant(merchantID);
         return response;
     }

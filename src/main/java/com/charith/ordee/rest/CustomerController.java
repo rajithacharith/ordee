@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -66,7 +67,7 @@ public class CustomerController {
         return merchantService.getMerchants();
     }
     @GetMapping("foodByMerchant")
-    public ResponseEntity getFoodByMerchant(@RequestParam("merchantID") String merchantID){
+    public ResponseEntity getFoodByMerchant(@RequestParam("merchantID") String merchantID) throws IOException {
         return foodItemService.getFoodItemsByMerchant(merchantID);
     }
 
