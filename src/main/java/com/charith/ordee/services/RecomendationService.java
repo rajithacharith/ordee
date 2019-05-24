@@ -4,7 +4,7 @@ import com.charith.ordee.beans.FoodItemBean;
 import com.charith.ordee.frequentItem.AprioriFrequentItemsetGenerator;
 import com.charith.ordee.frequentItem.FrequentItemsetData;
 import com.charith.ordee.repository.FoodItemRepository;
-import com.sun.deploy.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class RecomendationService {
             while (sc.hasNextLine()) {
                 String temp = sc.nextLine();
                 System.out.println(temp);
-                String[] splitText = StringUtils.splitString(temp, " ");
+                String[] splitText = StringUtils.split(temp," ");
                 System.out.println(splitText);
                 itemsetList.add(new HashSet<>(Arrays.asList(splitText)));
             }
