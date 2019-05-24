@@ -1,15 +1,13 @@
 package com.charith.ordee.services;
 
 import com.charith.ordee.beans.OrderBean;
+import com.charith.ordee.beans.OrderItem;
 import com.charith.ordee.beans.compositeKeys.OrderID;
 import com.charith.ordee.beans.dto.OrderDTO;
 import com.charith.ordee.beans.dto.OrderListDTO;
 import com.charith.ordee.beans.user.Chef;
 import com.charith.ordee.beans.user.Merchant;
-import com.charith.ordee.repository.ChefRepository;
-import com.charith.ordee.repository.FoodItemRepository;
-import com.charith.ordee.repository.MerchantRepository;
-import com.charith.ordee.repository.OrderRepository;
+import com.charith.ordee.repository.*;
 import org.hibernate.Session;
 
 import org.hibernate.criterion.Example;
@@ -39,7 +37,8 @@ public class OrderService {
     private ChefRepository chefRepository;
     @Autowired
     private RecomendationService recomendationService;
-
+    @Autowired
+    private CustomerRepository customerRepository;
 
     Logger logger = LogManager.getLogger();
     public ResponseEntity addOrder(OrderListDTO orderListDTO){
@@ -107,8 +106,17 @@ public class OrderService {
 
 
     public ResponseEntity getOrderByMerchantId(String merchantID){
-        List order = orderRepository.getAllByMerchantID(merchantID);
-        return new ResponseEntity(order,HttpStatus.OK);
+        List<OrderBean> order = orderRepository.getAllByMerchantID(merchantID);
+        List<OrderItem> orderItemList = new ArrayList<>();
+        for (OrderBean orderItem:order ) {
+            OrderItem item = new OrderItem();
+            item.setOrderID(orderItem.getOrderID());
+            item.setFoodItemBean(foodItemRepository.getByFoodItemID(orderItem.getFoodItemID()));
+            item.setCustomer(customerRepository.getCustomerByCustomerId(orderItem.getCustomerID()));
+            item.setStatus(orderItem.getStatus());
+            orderItemList.add(item);
+        }
+        return new ResponseEntity(orderItemList,HttpStatus.OK);
     }
 
     public ResponseEntity getRecomendation(OrderListDTO orderListDTO){
