@@ -132,5 +132,13 @@ public class OrderService {
         return new ResponseEntity(data,HttpStatus.OK);
     }
 
+    public ResponseEntity setStatus(String orderID, String status){
+        List<OrderBean> orderList = orderRepository.getAllByOrderID(orderID);
+        OrderBean order = orderList.get(0);
+        order.setStatus(status);
+        orderRepository.save(order);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 
 }

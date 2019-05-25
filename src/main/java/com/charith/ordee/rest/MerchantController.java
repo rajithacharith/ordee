@@ -59,4 +59,8 @@ public class MerchantController {
         ResponseEntity response = foodItemService.getFoodItemsByMerchant(merchantID);
         return response;
     }
+    @GetMapping("/setStatus")
+    public ResponseEntity setStatus(@RequestParam("orderId")String orderID, @RequestParam("status") String status){
+        return this.orderService.setStatus(orderID,status);
+    }
 }
