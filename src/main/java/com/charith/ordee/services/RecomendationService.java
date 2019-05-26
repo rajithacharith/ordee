@@ -37,7 +37,7 @@ public class RecomendationService {
             }
         }
 
-        data = generator.generate(itemsetList, 0.5);
+        data = generator.generate(itemsetList, 0.3 );
 
 
 
