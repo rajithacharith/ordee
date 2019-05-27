@@ -39,7 +39,10 @@ public class RecomendationService {
 
         data = generator.generate(itemsetList, 0.3 );
 
-
+        for (Set i:
+             data.getSupportCountMap().keySet()) {
+            System.out.println(i);
+        }
 
 
 
