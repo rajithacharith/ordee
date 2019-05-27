@@ -37,7 +37,7 @@ public class RecomendationService {
             }
         }
 
-        data = generator.generate(itemsetList, 0.3 );
+        data = generator.generate(itemsetList, 0.2 );
 
         for (Set i:
              data.getSupportCountMap().keySet()) {
